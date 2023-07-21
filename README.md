@@ -35,7 +35,8 @@ see [DOCUMENTATION.md](DOCUMENTATION.md)
 ```python
 #!/usr/bin/env python3
 
-from yahuelib.controller import LightController, GroupController
+# from yahuelib.controller import LightController
+from yahuelib.controller import GroupController
 from yahuelib.utils import rgb_to_hsv
 
 if __name__ == "__main__":
