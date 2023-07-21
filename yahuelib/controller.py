@@ -63,120 +63,160 @@ class _BaseController:
 
 
 class LightController(_BaseController):
+    '''Control a Philips Hue Light using the API of your Hue Bridge.
+
+    Args:
+    - `number: int` - The number of your light
+    - `bridge_ip_address: str` - The IP address of your Hue Bridge
+    - `bridge_api_user: str` - The user used to authenticate to the API
+
+    Use the class method `.from_name(name:str, ...)` to use the name of a light instead of the number.
+    '''
 
     _api_endpoint_all = "https://{bridge_ip_address}/api/{bridge_api_user}/lights"
     _api_endpoint_specific = "https://{bridge_ip_address}/api/{bridge_api_user}/lights/{number}"
 
     @property
     def reachable(self) -> bool:
+        '''Check if the light is reachable using `LightController.reachable`'''
         data = self._api_request()
         return data["state"]["reachable"]
 
     @property
     def on(self) -> bool:
+        '''Check if the light is on using `LightController.on`'''
         data = self._api_request()
         return data["state"]["on"]
 
     @on.setter
     def on(self, on:bool):
+        '''Turn the light on/off using `LightController.on = ...`'''
         assert type(on) == bool
         self._api_request("PUT", "/state", {"on": on})
-    
+
     @property
-    def brightness(self):
+    def brightness(self) -> int:
+        '''Get the brightness using `LightController.brightness`'''
         data = self._api_request()
         return data["state"]["bri"]
-    
+
     @brightness.setter
     def brightness(self, brightness:float):
+        '''Set the brightness using `LightController.brightness = ...`'''
         assert type(brightness) == float or type(brightness) == int
         bri_ = min(max(int(brightness * 254), 0), 254)
         self._api_request("PUT", "/state", {"bri": bri_})
-    
+
     @property
-    def hue(self):
+    def hue(self) -> int:
+        '''Get the hue using `LightController.hue`'''
         data = self._api_request()
         return data["state"]["hue"]
-    
+
     @hue.setter
     def hue(self, hue:float):
+        '''Set the hue using `LightController.hue = ...`'''
         assert type(hue) == float or type(hue) == int
         hue_ = min(max(int(hue * 65535), 0), 65535)
         self._api_request("PUT", "/state", {"hue": hue_})
 
     @property
-    def saturation(self):
+    def saturation(self) -> int:
+        '''Get the saturation using `LightController.saturation`'''
         data = self._api_request()
         return data["state"]["sat"]
-    
+
     @saturation.setter
     def saturation(self, saturation:float):
+        '''Set the saturation using `LightController.saturation = ...`'''
         assert type(saturation) == float or type(saturation) == int
         sat_ = min(max(int(saturation * 254), 0), 254)
         self._api_request("PUT", "/state", {"sat": sat_})
-    
+
     def alert(self):
+        '''Flash the light once.'''
         self._api_request("PUT", "/state", {"alert": "select"})
 
     def alert_long(self):
+        '''Flash the light for 10 seconds.'''
         self._api_request("PUT", "/state", {"alert": "lselect"})
 
 
 class GroupController(_BaseController):
+    '''Control a Philips Hue Light Group (Room/Zone) using the API of your Hue Bridge.
+
+    Args:
+    - `number: int` - The number of your light group
+    - `bridge_ip_address: str` - The IP address of your Hue Bridge
+    - `bridge_api_user: str` - The user used to authenticate to the API
+
+    Use the class method `.from_name(name:str, ...)` to use the name of a group instead of the number.
+    '''
 
     _api_endpoint_all = "https://{bridge_ip_address}/api/{bridge_api_user}/groups"
     _api_endpoint_specific = "https://{bridge_ip_address}/api/{bridge_api_user}/groups/{number}"
 
     @property
     def any_on(self) -> bool:
+        '''Check if any light in this group is on using `GroupController.any_on`'''
         data = self._api_request()
         return data["state"]["any_on"]
 
     @property
     def all_on(self) -> bool:
+        '''Check if all lights in this group are on using `GroupController.all_on`'''
         data = self._api_request()
         return data["state"]["all_on"]
 
     @all_on.setter
     def all_on(self, on:bool):
+        '''Turn on/off all lights in this group using `GroupController.all_on = ...`'''
         assert type(on) == bool
         self._api_request("PUT", "/action", {"on": on})
 
     @property
-    def brightness(self):
+    def brightness(self) -> int:
+        '''Get the last set brightness in this group using `GroupController.brightness`'''
         data = self._api_request()
         return data["action"]["bri"]
-    
+
     @brightness.setter
     def brightness(self, brightness:float):
+        '''Set the brightness of all lights in this group using `GroupController.brightness = ...`'''
         assert type(brightness) == float or type(brightness) == int
         bri_ = min(max(int(brightness * 254), 0), 254)
         self._api_request("PUT", "/action", {"bri": bri_})
 
     @property
-    def hue(self):
+    def hue(self) -> int:
+        '''Get the last set hue in this group using `GroupController.hue`'''
         data = self._api_request()
         return data["action"]["hue"]
-    
+
     @hue.setter
     def hue(self, hue:float):
+        '''Set the hue of all lights in this group using `GroupController.hue = ...`'''
         assert type(hue) == float or type(hue) == int
         hue_ = min(max(int(hue * 65535), 0), 65535)
         self._api_request("PUT", "/action", {"hue": hue_})
 
     @property
-    def saturation(self):
+    def saturation(self) -> int:
+        '''Get the last set saturation in this group using `GroupController.saturation`'''
         data = self._api_request()
         return data["action"]["sat"]
-    
+
     @saturation.setter
     def saturation(self, saturation:float):
+        '''Set the saturation of all lights in this group using `GroupController.saturation = ...`'''
         assert type(saturation) == float or type(saturation) == int
         sat_ = min(max(int(saturation * 254), 0), 254)
         self._api_request("PUT", "/action", {"sat": sat_})
-    
+
     def alert(self):
+        '''Flash all lights in the group once.'''
         self._api_request("PUT", "/action", {"alert": "select"})
 
     def alert_long(self):
+        '''Flash all lights in the group for 10 seconds.'''
         self._api_request("PUT", "/action", {"alert": "lselect"})
