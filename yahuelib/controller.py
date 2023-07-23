@@ -133,6 +133,19 @@ class LightController(_BaseController):
         sat_ = min(max(int(saturation * 254), 0), 254)
         self._api_request("PUT", "/state", {"sat": sat_})
 
+    @property
+    def color_temperature(self):
+        '''Get the white color temperature in Mired using `LightController.color_temperature`'''
+        data = self._api_request()
+        return data["state"]["ct"]
+
+    @color_temperature.setter
+    def color_temperature(self, mired:int):
+        '''Set the white color temperature in Mired (`154` - `500`) using `LightController.color_temperature = ...`'''
+        assert type(mired) == int
+        ct_ = min(max(mired, 154), 500)
+        self._api_request("PUT", "/state", {"ct": ct_})
+
     def alert(self):
         '''Flash the light once.'''
         self._api_request("PUT", "/state", {"alert": "select"})
@@ -212,6 +225,19 @@ class GroupController(_BaseController):
         assert type(saturation) == float or type(saturation) == int
         sat_ = min(max(int(saturation * 254), 0), 254)
         self._api_request("PUT", "/action", {"sat": sat_})
+
+    @property
+    def color_temperature(self):
+        '''Get the last set white color temperature in Mired using `GroupController.color_temperature`'''
+        data = self._api_request()
+        return data["action"]["ct"]
+
+    @color_temperature.setter
+    def color_temperature(self, mired:int):
+        '''Set the white color temperature in Mired (`154` - `500`) for all lights in this group using `GroupController.color_temperature = ...`'''
+        assert type(mired) == int
+        ct_ = min(max(mired, 154), 500)
+        self._api_request("PUT", "/action", {"ct": ct_})
 
     def alert(self):
         '''Flash all lights in the group once.'''

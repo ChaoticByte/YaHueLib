@@ -3,6 +3,7 @@
 * [yahuelib](#yahuelib)
 * [yahuelib.utils](#yahuelib.utils)
   * [rgb\_to\_hsv](#yahuelib.utils.rgb_to_hsv)
+  * [kelvin\_to\_mired](#yahuelib.utils.kelvin_to_mired)
 * [yahuelib.controller](#yahuelib.controller)
   * [LightController](#yahuelib.controller.LightController)
     * [reachable](#yahuelib.controller.LightController.reachable)
@@ -14,6 +15,8 @@
     * [hue](#yahuelib.controller.LightController.hue)
     * [saturation](#yahuelib.controller.LightController.saturation)
     * [saturation](#yahuelib.controller.LightController.saturation)
+    * [color\_temperature](#yahuelib.controller.LightController.color_temperature)
+    * [color\_temperature](#yahuelib.controller.LightController.color_temperature)
     * [alert](#yahuelib.controller.LightController.alert)
     * [alert\_long](#yahuelib.controller.LightController.alert_long)
   * [GroupController](#yahuelib.controller.GroupController)
@@ -26,6 +29,8 @@
     * [hue](#yahuelib.controller.GroupController.hue)
     * [saturation](#yahuelib.controller.GroupController.saturation)
     * [saturation](#yahuelib.controller.GroupController.saturation)
+    * [color\_temperature](#yahuelib.controller.GroupController.color_temperature)
+    * [color\_temperature](#yahuelib.controller.GroupController.color_temperature)
     * [alert](#yahuelib.controller.GroupController.alert)
     * [alert\_long](#yahuelib.controller.GroupController.alert_long)
 * [yahuelib.exceptions](#yahuelib.exceptions)
@@ -49,6 +54,16 @@ def rgb_to_hsv(r: int, g: int, b: int) -> tuple
 ```
 
 Convert RGB colors `(255, 220, 100)` to HSV `(0.129, 0.608, 1.0)`
+
+<a id="yahuelib.utils.kelvin_to_mired"></a>
+
+#### kelvin\_to\_mired
+
+```python
+def kelvin_to_mired(kelvin: int)
+```
+
+Convert the color temperature from Kelvin to Mired
 
 <a id="yahuelib.controller"></a>
 
@@ -170,6 +185,28 @@ def saturation(saturation: float)
 ```
 
 Set the saturation using `LightController.saturation = ...`
+
+<a id="yahuelib.controller.LightController.color_temperature"></a>
+
+#### color\_temperature
+
+```python
+@property
+def color_temperature()
+```
+
+Get the white color temperature in Mired using `LightController.color_temperature`
+
+<a id="yahuelib.controller.LightController.color_temperature"></a>
+
+#### color\_temperature
+
+```python
+@color_temperature.setter
+def color_temperature(mired: int)
+```
+
+Set the white color temperature in Mired (`154` - `500`) using `LightController.color_temperature = ...`
 
 <a id="yahuelib.controller.LightController.alert"></a>
 
@@ -307,6 +344,28 @@ def saturation(saturation: float)
 ```
 
 Set the saturation of all lights in this group using `GroupController.saturation = ...`
+
+<a id="yahuelib.controller.GroupController.color_temperature"></a>
+
+#### color\_temperature
+
+```python
+@property
+def color_temperature()
+```
+
+Get the last set white color temperature in Mired using `GroupController.color_temperature`
+
+<a id="yahuelib.controller.GroupController.color_temperature"></a>
+
+#### color\_temperature
+
+```python
+@color_temperature.setter
+def color_temperature(mired: int)
+```
+
+Set the white color temperature in Mired (`154` - `500`) for all lights in this group using `GroupController.color_temperature = ...`
 
 <a id="yahuelib.controller.GroupController.alert"></a>
 

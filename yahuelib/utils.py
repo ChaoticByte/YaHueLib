@@ -13,3 +13,8 @@ def rgb_to_hsv(r:int, g:int, b:int) -> tuple:
     g_ = g / 255.0
     b_ = b / 255.0
     return _rgb_to_hsv(r_, g_, b_)
+
+def kelvin_to_mired(kelvin:int):
+    '''Convert the color temperature from Kelvin to Mired'''
+    assert type(kelvin) == int
+    return round(1000000.0/kelvin)

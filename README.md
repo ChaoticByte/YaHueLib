@@ -15,6 +15,7 @@ See https://developers.meethue.com/develop/get-started-2/
     - brightness
     - hue
     - saturation
+    - white color temperature
     - alert
     - alert_long
 - 🏠 Groups (Zones and Rooms)
@@ -23,6 +24,7 @@ See https://developers.meethue.com/develop/get-started-2/
     - brightness
     - hue
     - saturation
+    - white color temperature
     - alert
     - alert_long
 
