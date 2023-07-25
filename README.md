@@ -43,12 +43,11 @@ from yahuelib.utils import rgb_to_hsv
 
 if __name__ == "__main__":
     home = GroupController.from_name("Home", "192.168.0.120", "XXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXX")
-    if not home.all_on:
-        home.all_on = True
+    if not home.check_all_on():
+        home.set_all_on(True)
     color = rgb_to_hsv(255, 220, 100)
-    home.hue = color[0]
-    home.saturation = color[1]
-    home.brightness = 1.0
+    home.set_hue(color[0])
+    home.set_saturation(color[1])
+    home.set_brightness(1.0)
     home.alert()
-
 ```
