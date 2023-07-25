@@ -1,38 +1,38 @@
 # Table of Contents
 
 * [yahuelib](#yahuelib)
-* [yahuelib.utils](#yahuelib.utils)
-  * [rgb\_to\_hsv](#yahuelib.utils.rgb_to_hsv)
-  * [kelvin\_to\_mired](#yahuelib.utils.kelvin_to_mired)
 * [yahuelib.controller](#yahuelib.controller)
   * [LightController](#yahuelib.controller.LightController)
-    * [reachable](#yahuelib.controller.LightController.reachable)
-    * [on](#yahuelib.controller.LightController.on)
-    * [on](#yahuelib.controller.LightController.on)
-    * [brightness](#yahuelib.controller.LightController.brightness)
-    * [brightness](#yahuelib.controller.LightController.brightness)
-    * [hue](#yahuelib.controller.LightController.hue)
-    * [hue](#yahuelib.controller.LightController.hue)
-    * [saturation](#yahuelib.controller.LightController.saturation)
-    * [saturation](#yahuelib.controller.LightController.saturation)
-    * [color\_temperature](#yahuelib.controller.LightController.color_temperature)
-    * [color\_temperature](#yahuelib.controller.LightController.color_temperature)
+    * [check\_reachable](#yahuelib.controller.LightController.check_reachable)
+    * [check\_on](#yahuelib.controller.LightController.check_on)
+    * [set\_on](#yahuelib.controller.LightController.set_on)
+    * [get\_brightness](#yahuelib.controller.LightController.get_brightness)
+    * [set\_brightness](#yahuelib.controller.LightController.set_brightness)
+    * [get\_hue](#yahuelib.controller.LightController.get_hue)
+    * [set\_hue](#yahuelib.controller.LightController.set_hue)
+    * [get\_saturation](#yahuelib.controller.LightController.get_saturation)
+    * [set\_saturation](#yahuelib.controller.LightController.set_saturation)
+    * [get\_color\_temperature](#yahuelib.controller.LightController.get_color_temperature)
+    * [set\_color\_temperature](#yahuelib.controller.LightController.set_color_temperature)
     * [alert](#yahuelib.controller.LightController.alert)
     * [alert\_long](#yahuelib.controller.LightController.alert_long)
   * [GroupController](#yahuelib.controller.GroupController)
-    * [any\_on](#yahuelib.controller.GroupController.any_on)
-    * [all\_on](#yahuelib.controller.GroupController.all_on)
-    * [all\_on](#yahuelib.controller.GroupController.all_on)
-    * [brightness](#yahuelib.controller.GroupController.brightness)
-    * [brightness](#yahuelib.controller.GroupController.brightness)
-    * [hue](#yahuelib.controller.GroupController.hue)
-    * [hue](#yahuelib.controller.GroupController.hue)
-    * [saturation](#yahuelib.controller.GroupController.saturation)
-    * [saturation](#yahuelib.controller.GroupController.saturation)
-    * [color\_temperature](#yahuelib.controller.GroupController.color_temperature)
-    * [color\_temperature](#yahuelib.controller.GroupController.color_temperature)
+    * [check\_any\_on](#yahuelib.controller.GroupController.check_any_on)
+    * [check\_all\_on](#yahuelib.controller.GroupController.check_all_on)
+    * [set\_all\_on](#yahuelib.controller.GroupController.set_all_on)
+    * [get\_brightness](#yahuelib.controller.GroupController.get_brightness)
+    * [set\_brightness](#yahuelib.controller.GroupController.set_brightness)
+    * [get\_hue](#yahuelib.controller.GroupController.get_hue)
+    * [set\_hue](#yahuelib.controller.GroupController.set_hue)
+    * [get\_saturation](#yahuelib.controller.GroupController.get_saturation)
+    * [set\_saturation](#yahuelib.controller.GroupController.set_saturation)
+    * [get\_color\_temperature](#yahuelib.controller.GroupController.get_color_temperature)
+    * [set\_color\_temperature](#yahuelib.controller.GroupController.set_color_temperature)
     * [alert](#yahuelib.controller.GroupController.alert)
     * [alert\_long](#yahuelib.controller.GroupController.alert_long)
+* [yahuelib.utils](#yahuelib.utils)
+  * [rgb\_to\_hsv](#yahuelib.utils.rgb_to_hsv)
+  * [kelvin\_to\_mired](#yahuelib.utils.kelvin_to_mired)
 * [yahuelib.exceptions](#yahuelib.exceptions)
   * [LightOrGroupNotFound](#yahuelib.exceptions.LightOrGroupNotFound)
   * [APIError](#yahuelib.exceptions.APIError)
@@ -40,30 +40,6 @@
 <a id="yahuelib"></a>
 
 # yahuelib
-
-<a id="yahuelib.utils"></a>
-
-# yahuelib.utils
-
-<a id="yahuelib.utils.rgb_to_hsv"></a>
-
-#### rgb\_to\_hsv
-
-```python
-def rgb_to_hsv(r: int, g: int, b: int) -> tuple
-```
-
-Convert RGB colors `(255, 220, 100)` to HSV `(0.129, 0.608, 1.0)`
-
-<a id="yahuelib.utils.kelvin_to_mired"></a>
-
-#### kelvin\_to\_mired
-
-```python
-def kelvin_to_mired(kelvin: int)
-```
-
-Convert the color temperature from Kelvin to Mired
 
 <a id="yahuelib.controller"></a>
 
@@ -87,126 +63,115 @@ Control a Philips Hue Light using the API of your Hue Bridge.
   
   Use the class method `.from_name(name:str, ...)` to use the name of a light instead of the number.
 
-<a id="yahuelib.controller.LightController.reachable"></a>
+<a id="yahuelib.controller.LightController.check_reachable"></a>
 
-#### reachable
-
-```python
-@property
-def reachable() -> bool
-```
-
-Check if the light is reachable using `LightController.reachable`
-
-<a id="yahuelib.controller.LightController.on"></a>
-
-#### on
+#### check\_reachable
 
 ```python
-@property
-def on() -> bool
+def check_reachable() -> bool
 ```
 
-Check if the light is on using `LightController.on`
+Check if the light is reachable
 
-<a id="yahuelib.controller.LightController.on"></a>
+<a id="yahuelib.controller.LightController.check_on"></a>
 
-#### on
+#### check\_on
 
 ```python
-@on.setter
-def on(on: bool)
+def check_on() -> bool
 ```
 
-Turn the light on/off using `LightController.on = ...`
+Check if the light is on
 
-<a id="yahuelib.controller.LightController.brightness"></a>
+<a id="yahuelib.controller.LightController.set_on"></a>
 
-#### brightness
+#### set\_on
 
 ```python
-@property
-def brightness() -> int
+def set_on(on: bool)
 ```
 
-Get the brightness using `LightController.brightness`
+Turn the light on/off
 
-<a id="yahuelib.controller.LightController.brightness"></a>
+<a id="yahuelib.controller.LightController.get_brightness"></a>
 
-#### brightness
+#### get\_brightness
 
 ```python
-@brightness.setter
-def brightness(brightness: float)
+def get_brightness() -> int
 ```
 
-Set the brightness using `LightController.brightness = ...`
+Get the brightness
 
-<a id="yahuelib.controller.LightController.hue"></a>
+<a id="yahuelib.controller.LightController.set_brightness"></a>
 
-#### hue
+#### set\_brightness
 
 ```python
-@property
-def hue() -> int
+def set_brightness(brightness: float)
 ```
 
-Get the hue using `LightController.hue`
+Set the brightness
 
-<a id="yahuelib.controller.LightController.hue"></a>
+<a id="yahuelib.controller.LightController.get_hue"></a>
 
-#### hue
+#### get\_hue
 
 ```python
-@hue.setter
-def hue(hue: float)
+def get_hue() -> int
 ```
 
-Set the hue using `LightController.hue = ...`
+Get the hue
 
-<a id="yahuelib.controller.LightController.saturation"></a>
+<a id="yahuelib.controller.LightController.set_hue"></a>
 
-#### saturation
+#### set\_hue
 
 ```python
-@property
-def saturation() -> int
+def set_hue(hue: float)
 ```
 
-Get the saturation using `LightController.saturation`
+Set the hue
 
-<a id="yahuelib.controller.LightController.saturation"></a>
+<a id="yahuelib.controller.LightController.get_saturation"></a>
 
-#### saturation
+#### get\_saturation
 
 ```python
-@saturation.setter
-def saturation(saturation: float)
+def get_saturation() -> int
 ```
 
-Set the saturation using `LightController.saturation = ...`
+Get the saturation
 
-<a id="yahuelib.controller.LightController.color_temperature"></a>
+<a id="yahuelib.controller.LightController.set_saturation"></a>
 
-#### color\_temperature
+#### set\_saturation
 
 ```python
-@property
-def color_temperature()
+def set_saturation(saturation: float)
 ```
 
-Get the white color temperature in Mired using `LightController.color_temperature`
+Set the saturation
 
-<a id="yahuelib.controller.LightController.color_temperature"></a>
+<a id="yahuelib.controller.LightController.get_color_temperature"></a>
 
-#### color\_temperature
+#### get\_color\_temperature
 
 ```python
-@color_temperature.setter
-def color_temperature(mired: int)
+def get_color_temperature()
 ```
 
-Set the white color temperature in Mired (`154` - `500`) using `LightController.color_temperature = ...`
+Get the white color temperature in Mired
+
+<a id="yahuelib.controller.LightController.set_color_temperature"></a>
+
+#### set\_color\_temperature
+
+```python
+def set_color_temperature(mired: int)
+```
+
+Set the white color temperature in Mired (`154` - `500`)
 
 <a id="yahuelib.controller.LightController.alert"></a>
 
@@ -246,126 +211,115 @@ Control a Philips Hue Light Group (Room/Zone) using the API of your Hue Bridge.
   
   Use the class method `.from_name(name:str, ...)` to use the name of a group instead of the number.
 
-<a id="yahuelib.controller.GroupController.any_on"></a>
+<a id="yahuelib.controller.GroupController.check_any_on"></a>
 
-#### any\_on
-
-```python
-@property
-def any_on() -> bool
-```
-
-Check if any light in this group is on using `GroupController.any_on`
-
-<a id="yahuelib.controller.GroupController.all_on"></a>
-
-#### all\_on
+#### check\_any\_on
 
 ```python
-@property
-def all_on() -> bool
+def check_any_on() -> bool
 ```
 
-Check if all lights in this group are on using `GroupController.all_on`
+Check if any light in this group is on
 
-<a id="yahuelib.controller.GroupController.all_on"></a>
+<a id="yahuelib.controller.GroupController.check_all_on"></a>
 
-#### all\_on
+#### check\_all\_on
 
 ```python
-@all_on.setter
-def all_on(on: bool)
+def check_all_on() -> bool
 ```
 
-Turn on/off all lights in this group using `GroupController.all_on = ...`
+Check if all lights in this group are on
 
-<a id="yahuelib.controller.GroupController.brightness"></a>
+<a id="yahuelib.controller.GroupController.set_all_on"></a>
 
-#### brightness
+#### set\_all\_on
 
 ```python
-@property
-def brightness() -> int
+def set_all_on(on: bool)
 ```
 
-Get the last set brightness in this group using `GroupController.brightness`
+Turn on/off all lights in this group
 
-<a id="yahuelib.controller.GroupController.brightness"></a>
+<a id="yahuelib.controller.GroupController.get_brightness"></a>
 
-#### brightness
+#### get\_brightness
 
 ```python
-@brightness.setter
-def brightness(brightness: float)
+def get_brightness() -> int
 ```
 
-Set the brightness of all lights in this group using `GroupController.brightness = ...`
+Get the last set brightness in this group
 
-<a id="yahuelib.controller.GroupController.hue"></a>
+<a id="yahuelib.controller.GroupController.set_brightness"></a>
 
-#### hue
+#### set\_brightness
 
 ```python
-@property
-def hue() -> int
+def set_brightness(brightness: float)
 ```
 
-Get the last set hue in this group using `GroupController.hue`
+Set the brightness of all lights in this group
 
-<a id="yahuelib.controller.GroupController.hue"></a>
+<a id="yahuelib.controller.GroupController.get_hue"></a>
 
-#### hue
+#### get\_hue
 
 ```python
-@hue.setter
-def hue(hue: float)
+def get_hue() -> int
 ```
 
-Set the hue of all lights in this group using `GroupController.hue = ...`
+Get the last set hue in this group
 
-<a id="yahuelib.controller.GroupController.saturation"></a>
+<a id="yahuelib.controller.GroupController.set_hue"></a>
 
-#### saturation
+#### set\_hue
 
 ```python
-@property
-def saturation() -> int
+def set_hue(hue: float)
 ```
 
-Get the last set saturation in this group using `GroupController.saturation`
+Set the hue of all lights in this group
 
-<a id="yahuelib.controller.GroupController.saturation"></a>
+<a id="yahuelib.controller.GroupController.get_saturation"></a>
 
-#### saturation
+#### get\_saturation
 
 ```python
-@saturation.setter
-def saturation(saturation: float)
+def get_saturation() -> int
 ```
 
-Set the saturation of all lights in this group using `GroupController.saturation = ...`
+Get the last set saturation in this group
 
-<a id="yahuelib.controller.GroupController.color_temperature"></a>
+<a id="yahuelib.controller.GroupController.set_saturation"></a>
 
-#### color\_temperature
+#### set\_saturation
 
 ```python
-@property
-def color_temperature()
+def set_saturation(saturation: float)
 ```
 
-Get the last set white color temperature in Mired using `GroupController.color_temperature`
+Set the saturation of all lights in this group
 
-<a id="yahuelib.controller.GroupController.color_temperature"></a>
+<a id="yahuelib.controller.GroupController.get_color_temperature"></a>
 
-#### color\_temperature
+#### get\_color\_temperature
 
 ```python
-@color_temperature.setter
-def color_temperature(mired: int)
+def get_color_temperature()
 ```
 
-Set the white color temperature in Mired (`154` - `500`) for all lights in this group using `GroupController.color_temperature = ...`
+Get the last set white color temperature in Mired
+
+<a id="yahuelib.controller.GroupController.set_color_temperature"></a>
+
+#### set\_color\_temperature
+
+```python
+def set_color_temperature(mired: int)
+```
+
+Set the white color temperature in Mired (`154` - `500`) for all lights in this group
 
 <a id="yahuelib.controller.GroupController.alert"></a>
 
@@ -386,6 +340,30 @@ def alert_long()
 ```
 
 Flash all lights in the group for 10 seconds.
+
+<a id="yahuelib.utils"></a>
+
+# yahuelib.utils
+
+<a id="yahuelib.utils.rgb_to_hsv"></a>
+
+#### rgb\_to\_hsv
+
+```python
+def rgb_to_hsv(r: int, g: int, b: int) -> tuple
+```
+
+Convert RGB colors `(255, 220, 100)` to HSV `(0.129, 0.608, 1.0)`
+
+<a id="yahuelib.utils.kelvin_to_mired"></a>
+
+#### kelvin\_to\_mired
+
+```python
+def kelvin_to_mired(kelvin: int)
+```
+
+Convert the color temperature from Kelvin to Mired
 
 <a id="yahuelib.exceptions"></a>
 
