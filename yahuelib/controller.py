@@ -267,8 +267,8 @@ class MotionSensor(_BaseController):
         data = self._api_request()["config"]["sensitivitymax"]
         return data
 
-    def get_ledindication(self) -> bool:
-        '''Get the maximum sensititvity of the sensor'''
+    def check_ledindication(self) -> bool:
+        '''Check if the LED indication is turned on or off'''
         data = self._api_request()["config"]["ledindication"]
         return data
 

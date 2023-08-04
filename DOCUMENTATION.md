@@ -38,7 +38,7 @@
     * [get\_sensitivity](#yahuelib.controller.MotionSensor.get_sensitivity)
     * [set\_sensitivity](#yahuelib.controller.MotionSensor.set_sensitivity)
     * [get\_sensitivitymax](#yahuelib.controller.MotionSensor.get_sensitivitymax)
-    * [get\_ledindication](#yahuelib.controller.MotionSensor.get_ledindication)
+    * [check\_ledindication](#yahuelib.controller.MotionSensor.check_ledindication)
     * [set\_ledindication](#yahuelib.controller.MotionSensor.set_ledindication)
     * [get\_presence](#yahuelib.controller.MotionSensor.get_presence)
 * [yahuelib.utils](#yahuelib.utils)
@@ -430,15 +430,15 @@ def get_sensitivitymax() -> int
 
 Get the maximum sensititvity of the sensor
 
-<a id="yahuelib.controller.MotionSensor.get_ledindication"></a>
+<a id="yahuelib.controller.MotionSensor.check_ledindication"></a>
 
-#### get\_ledindication
+#### check\_ledindication
 
 ```python
-def get_ledindication() -> bool
+def check_ledindication() -> bool
 ```
 
-Get the maximum sensititvity of the sensor
+Check if the LED indication is turned on or off
 
 <a id="yahuelib.controller.MotionSensor.set_ledindication"></a>
 
