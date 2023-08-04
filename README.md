@@ -27,6 +27,14 @@ See https://developers.meethue.com/develop/get-started-2/
     - white color temperature
     - alert
     - alert_long
+- 👋 Motion Sensors
+    - reachable
+    - on
+    - battery
+    - sensitivity
+    - sensitivitymax
+    - ledindication
+    - presence
 
 ## Documentation
 
@@ -48,6 +56,6 @@ if __name__ == "__main__":
     color = rgb_to_hsv(255, 220, 100)
     home.set_hue(color[0])
     home.set_saturation(color[1])
-    home.set_brightness(1.0)
+    home.set_brightness(254)
     home.alert()
 ```

@@ -1,7 +1,7 @@
 # Copyright (c) 2023 Julian Müller (ChaoticByte)
 
-class LightOrGroupNotFound(Exception):
-    '''`LightOrGroupNotFound` Exception'''
+class DeviceNotFound(Exception):
+    '''`DeviceNotFound` Exception'''
     pass
 
 class APIError(Exception):

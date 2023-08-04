@@ -40,7 +40,7 @@ class _BaseController:
         for n in data:
             if data[n]["name"] == name:
                 return cls(int(n), bridge_ip_address, bridge_api_user)
-        raise LightOrGroupNotFound()
+        raise DeviceNotFound()
 
     def _api_request(self, method="GET", path:str="", data:dict={}):
         assert type(method) == str
@@ -78,13 +78,13 @@ class LightController(_BaseController):
 
     def check_reachable(self) -> bool:
         '''Check if the light is reachable'''
-        data = self._api_request()
-        return data["state"]["reachable"]
+        data = self._api_request()["state"]["reachable"]
+        return data
 
     def check_on(self) -> bool:
         '''Check if the light is on'''
-        data = self._api_request()
-        return data["state"]["on"]
+        data = self._api_request()["state"]["on"]
+        return data
 
     def set_on(self, on:bool):
         '''Turn the light on/off'''
@@ -93,41 +93,41 @@ class LightController(_BaseController):
 
     def get_brightness(self) -> int:
         '''Get the brightness'''
-        data = self._api_request()
-        return data["state"]["bri"]
+        data = self._api_request()["state"]["bri"]
+        return data
 
-    def set_brightness(self, brightness:float):
-        '''Set the brightness'''
-        assert type(brightness) == float or type(brightness) == int
-        bri_ = min(max(int(brightness * 254), 0), 254)
+    def set_brightness(self, brightness:int):
+        '''Set the brightness (`0` - `254`)'''
+        assert type(brightness) == int
+        bri_ = min(max(brightness, 0), 254)
         self._api_request("PUT", "/state", {"bri": bri_})
 
     def get_hue(self) -> int:
         '''Get the hue'''
-        data = self._api_request()
-        return data["state"]["hue"]
+        data = self._api_request()["state"]["hue"]
+        return data
 
-    def set_hue(self, hue:float):
-        '''Set the hue'''
-        assert type(hue) == float or type(hue) == int
-        hue_ = min(max(int(hue * 65535), 0), 65535)
+    def set_hue(self, hue:int):
+        '''Set the hue (0 - 65535)'''
+        assert type(hue) == int
+        hue_ = min(max(hue, 0), 65535)
         self._api_request("PUT", "/state", {"hue": hue_})
 
     def get_saturation(self) -> int:
         '''Get the saturation'''
-        data = self._api_request()
-        return data["state"]["sat"]
+        data = self._api_request()["state"]["sat"]
+        return data
 
-    def set_saturation(self, saturation:float):
-        '''Set the saturation'''
-        assert type(saturation) == float or type(saturation) == int
-        sat_ = min(max(int(saturation * 254), 0), 254)
+    def set_saturation(self, saturation:int):
+        '''Set the saturation (`0` - `254`)'''
+        assert type(saturation) == int
+        sat_ = min(max(saturation, 0), 254)
         self._api_request("PUT", "/state", {"sat": sat_})
 
-    def get_color_temperature(self):
+    def get_color_temperature(self) -> int:
         '''Get the white color temperature in Mired'''
-        data = self._api_request()
-        return data["state"]["ct"]
+        data = self._api_request()["state"]["ct"]
+        return data
 
     def set_color_temperature(self, mired:int):
         '''Set the white color temperature in Mired (`154` - `500`)'''
@@ -160,56 +160,56 @@ class GroupController(_BaseController):
 
     def check_any_on(self) -> bool:
         '''Check if any light in this group is on'''
-        data = self._api_request()
-        return data["state"]["any_on"]
+        data = self._api_request()["state"]["any_on"]
+        return data
 
     def check_all_on(self) -> bool:
         '''Check if all lights in this group are on'''
-        data = self._api_request()
-        return data["state"]["all_on"]
+        data = self._api_request()["state"]["all_on"]
+        return data
 
     def set_all_on(self, on:bool):
         '''Turn on/off all lights in this group'''
         assert type(on) == bool
         self._api_request("PUT", "/action", {"on": on})
 
-    def get_brightness(self) -> int:
+    def get_brightness(self):
         '''Get the last set brightness in this group'''
-        data = self._api_request()
-        return data["action"]["bri"]
+        data = self._api_request()["action"]["bri"]
+        return data
 
-    def set_brightness(self, brightness:float):
-        '''Set the brightness of all lights in this group'''
-        assert type(brightness) == float or type(brightness) == int
-        bri_ = min(max(int(brightness * 254), 0), 254)
+    def set_brightness(self, brightness:int):
+        '''Set the brightness (`0` - `254`) of all lights in this group'''
+        assert type(brightness) == int
+        bri_ = min(max(brightness, 0), 254)
         self._api_request("PUT", "/action", {"bri": bri_})
 
     def get_hue(self) -> int:
         '''Get the last set hue in this group'''
-        data = self._api_request()
-        return data["action"]["hue"]
+        data = self._api_request()["action"]["hue"]
+        return data
 
-    def set_hue(self, hue:float):
-        '''Set the hue of all lights in this group'''
-        assert type(hue) == float or type(hue) == int
-        hue_ = min(max(int(hue * 65535), 0), 65535)
+    def set_hue(self, hue:int):
+        '''Set the hue (`0` - `65535`) of all lights in this group'''
+        assert type(hue) == int
+        hue_ = min(max(hue, 0), 65535)
         self._api_request("PUT", "/action", {"hue": hue_})
 
     def get_saturation(self) -> int:
         '''Get the last set saturation in this group'''
-        data = self._api_request()
-        return data["action"]["sat"]
+        data = self._api_request()["action"]["sat"]
+        return data
 
-    def set_saturation(self, saturation:float):
-        '''Set the saturation of all lights in this group'''
-        assert type(saturation) == float or type(saturation) == int
-        sat_ = min(max(int(saturation * 254), 0), 254)
+    def set_saturation(self, saturation:int):
+        '''Set the saturation (`0` - `254`) of all lights in this group'''
+        assert type(saturation) == int
+        sat_ = min(max(saturation, 0), 254)
         self._api_request("PUT", "/action", {"sat": sat_})
 
-    def get_color_temperature(self):
+    def get_color_temperature(self) -> int:
         '''Get the last set white color temperature in Mired'''
-        data = self._api_request()
-        return data["action"]["ct"]
+        data = self._api_request()["action"]["ct"]
+        return data
 
     def set_color_temperature(self, mired:int):
         '''Set the white color temperature in Mired (`154` - `500`) for all lights in this group'''
@@ -224,3 +224,60 @@ class GroupController(_BaseController):
     def alert_long(self):
         '''Flash all lights in the group for 10 seconds.'''
         self._api_request("PUT", "/action", {"alert": "lselect"})
+
+
+class MotionSensor(_BaseController):
+
+    _api_endpoint_all = "https://{bridge_ip_address}/api/{bridge_api_user}/sensors"
+    _api_endpoint_specific = "https://{bridge_ip_address}/api/{bridge_api_user}/sensors/{number}"
+
+    def check_on(self) -> bool:
+        '''Check if the sensor is on'''
+        data = self._api_request()["config"]["on"]
+        return data
+
+    def set_on(self, on:bool):
+        '''Turn the sensor on/off'''
+        assert type(on) == bool
+        self._api_request("PUT", "/config", {"on": on})
+
+    def check_reachable(self) -> bool:
+        '''Check if the sensor is reachable'''
+        data = self._api_request()["config"]["reachable"]
+        return data
+
+    def get_battery(self) -> int:
+        '''Get the current charge of the battery in percent'''
+        data = self._api_request()
+        return data["config"]["battery"]
+
+    def get_sensitivity(self) -> int:
+        '''Get the sensitivity of the sensor'''
+        data = self._api_request()["config"]["sensitivity"]
+        return data
+
+    def set_sensitivity(self, sensitivity:int):
+        '''Set the sensitivity of the sensor'''
+        assert type(sensitivity) == int
+        sensitivity_ = min(max(sensitivity, 0), int(self.get_sensitivitymax()))
+        self._api_request("PUT", "/config", {"sensitivity": sensitivity_})
+
+    def get_sensitivitymax(self) -> int:
+        '''Get the maximum sensititvity of the sensor'''
+        data = self._api_request()["config"]["sensitivitymax"]
+        return data
+
+    def get_ledindication(self) -> bool:
+        '''Get the maximum sensititvity of the sensor'''
+        data = self._api_request()["config"]["ledindication"]
+        return data
+
+    def set_ledindication(self, on:bool):
+        '''Turn the LED indicator on/off'''
+        assert type(on) == bool
+        self._api_request("PUT", "/config", {"ledindication": on})
+
+    def get_presence(self) -> bool:
+        '''Check if the motion sensor detected the presence of someone in it's reach'''
+        data = self._api_request()["state"]["presence"]
+        return data

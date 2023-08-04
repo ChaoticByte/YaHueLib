@@ -30,11 +30,22 @@
     * [set\_color\_temperature](#yahuelib.controller.GroupController.set_color_temperature)
     * [alert](#yahuelib.controller.GroupController.alert)
     * [alert\_long](#yahuelib.controller.GroupController.alert_long)
+  * [MotionSensor](#yahuelib.controller.MotionSensor)
+    * [check\_on](#yahuelib.controller.MotionSensor.check_on)
+    * [set\_on](#yahuelib.controller.MotionSensor.set_on)
+    * [check\_reachable](#yahuelib.controller.MotionSensor.check_reachable)
+    * [get\_battery](#yahuelib.controller.MotionSensor.get_battery)
+    * [get\_sensitivity](#yahuelib.controller.MotionSensor.get_sensitivity)
+    * [set\_sensitivity](#yahuelib.controller.MotionSensor.set_sensitivity)
+    * [get\_sensitivitymax](#yahuelib.controller.MotionSensor.get_sensitivitymax)
+    * [get\_ledindication](#yahuelib.controller.MotionSensor.get_ledindication)
+    * [set\_ledindication](#yahuelib.controller.MotionSensor.set_ledindication)
+    * [get\_presence](#yahuelib.controller.MotionSensor.get_presence)
 * [yahuelib.utils](#yahuelib.utils)
   * [rgb\_to\_hsv](#yahuelib.utils.rgb_to_hsv)
   * [kelvin\_to\_mired](#yahuelib.utils.kelvin_to_mired)
 * [yahuelib.exceptions](#yahuelib.exceptions)
-  * [LightOrGroupNotFound](#yahuelib.exceptions.LightOrGroupNotFound)
+  * [DeviceNotFound](#yahuelib.exceptions.DeviceNotFound)
   * [APIError](#yahuelib.exceptions.APIError)
 
 <a id="yahuelib"></a>
@@ -108,10 +119,10 @@ Get the brightness
 #### set\_brightness
 
 ```python
-def set_brightness(brightness: float)
+def set_brightness(brightness: int)
 ```
 
-Set the brightness
+Set the brightness (`0` - `254`)
 
 <a id="yahuelib.controller.LightController.get_hue"></a>
 
@@ -128,10 +139,10 @@ Get the hue
 #### set\_hue
 
 ```python
-def set_hue(hue: float)
+def set_hue(hue: int)
 ```
 
-Set the hue
+Set the hue (0 - 65535)
 
 <a id="yahuelib.controller.LightController.get_saturation"></a>
 
@@ -148,17 +159,17 @@ Get the saturation
 #### set\_saturation
 
 ```python
-def set_saturation(saturation: float)
+def set_saturation(saturation: int)
 ```
 
-Set the saturation
+Set the saturation (`0` - `254`)
 
 <a id="yahuelib.controller.LightController.get_color_temperature"></a>
 
 #### get\_color\_temperature
 
 ```python
-def get_color_temperature()
+def get_color_temperature() -> int
 ```
 
 Get the white color temperature in Mired
@@ -246,7 +257,7 @@ Turn on/off all lights in this group
 #### get\_brightness
 
 ```python
-def get_brightness() -> int
+def get_brightness()
 ```
 
 Get the last set brightness in this group
@@ -256,10 +267,10 @@ Get the last set brightness in this group
 #### set\_brightness
 
 ```python
-def set_brightness(brightness: float)
+def set_brightness(brightness: int)
 ```
 
-Set the brightness of all lights in this group
+Set the brightness (`0` - `254`) of all lights in this group
 
 <a id="yahuelib.controller.GroupController.get_hue"></a>
 
@@ -276,10 +287,10 @@ Get the last set hue in this group
 #### set\_hue
 
 ```python
-def set_hue(hue: float)
+def set_hue(hue: int)
 ```
 
-Set the hue of all lights in this group
+Set the hue (`0` - `65535`) of all lights in this group
 
 <a id="yahuelib.controller.GroupController.get_saturation"></a>
 
@@ -296,17 +307,17 @@ Get the last set saturation in this group
 #### set\_saturation
 
 ```python
-def set_saturation(saturation: float)
+def set_saturation(saturation: int)
 ```
 
-Set the saturation of all lights in this group
+Set the saturation (`0` - `254`) of all lights in this group
 
 <a id="yahuelib.controller.GroupController.get_color_temperature"></a>
 
 #### get\_color\_temperature
 
 ```python
-def get_color_temperature()
+def get_color_temperature() -> int
 ```
 
 Get the last set white color temperature in Mired
@@ -341,6 +352,114 @@ def alert_long()
 
 Flash all lights in the group for 10 seconds.
 
+<a id="yahuelib.controller.MotionSensor"></a>
+
+## MotionSensor Objects
+
+```python
+class MotionSensor(_BaseController)
+```
+
+<a id="yahuelib.controller.MotionSensor.check_on"></a>
+
+#### check\_on
+
+```python
+def check_on() -> bool
+```
+
+Check if the sensor is on
+
+<a id="yahuelib.controller.MotionSensor.set_on"></a>
+
+#### set\_on
+
+```python
+def set_on(on: bool)
+```
+
+Turn the sensor on/off
+
+<a id="yahuelib.controller.MotionSensor.check_reachable"></a>
+
+#### check\_reachable
+
+```python
+def check_reachable() -> bool
+```
+
+Check if the sensor is reachable
+
+<a id="yahuelib.controller.MotionSensor.get_battery"></a>
+
+#### get\_battery
+
+```python
+def get_battery() -> int
+```
+
+Get the current charge of the battery in percent
+
+<a id="yahuelib.controller.MotionSensor.get_sensitivity"></a>
+
+#### get\_sensitivity
+
+```python
+def get_sensitivity() -> int
+```
+
+Get the sensitivity of the sensor
+
+<a id="yahuelib.controller.MotionSensor.set_sensitivity"></a>
+
+#### set\_sensitivity
+
+```python
+def set_sensitivity(sensitivity: int)
+```
+
+Set the sensitivity of the sensor
+
+<a id="yahuelib.controller.MotionSensor.get_sensitivitymax"></a>
+
+#### get\_sensitivitymax
+
+```python
+def get_sensitivitymax() -> int
+```
+
+Get the maximum sensititvity of the sensor
+
+<a id="yahuelib.controller.MotionSensor.get_ledindication"></a>
+
+#### get\_ledindication
+
+```python
+def get_ledindication() -> bool
+```
+
+Get the maximum sensititvity of the sensor
+
+<a id="yahuelib.controller.MotionSensor.set_ledindication"></a>
+
+#### set\_ledindication
+
+```python
+def set_ledindication(on: bool)
+```
+
+Turn the LED indicator on/off
+
+<a id="yahuelib.controller.MotionSensor.get_presence"></a>
+
+#### get\_presence
+
+```python
+def get_presence() -> bool
+```
+
+Check if the motion sensor detected the presence of someone in it's reach
+
 <a id="yahuelib.utils"></a>
 
 # yahuelib.utils
@@ -353,7 +472,7 @@ Flash all lights in the group for 10 seconds.
 def rgb_to_hsv(r: int, g: int, b: int) -> tuple
 ```
 
-Convert RGB colors `(255, 220, 100)` to HSV `(0.129, 0.608, 1.0)`
+Convert RGB colors `(255, 220, 100)` to Philips Hue's hue, saturation and brightness values `(8456, 149, 245)` imprecisely
 
 <a id="yahuelib.utils.kelvin_to_mired"></a>
 
@@ -369,15 +488,15 @@ Convert the color temperature from Kelvin to Mired
 
 # yahuelib.exceptions
 
-<a id="yahuelib.exceptions.LightOrGroupNotFound"></a>
+<a id="yahuelib.exceptions.DeviceNotFound"></a>
 
-## LightOrGroupNotFound Objects
+## DeviceNotFound Objects
 
 ```python
-class LightOrGroupNotFound(Exception)
+class DeviceNotFound(Exception)
 ```
 
-`LightOrGroupNotFound` Exception
+`DeviceNotFound` Exception
 
 <a id="yahuelib.exceptions.APIError"></a>
 
