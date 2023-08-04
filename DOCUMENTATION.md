@@ -472,7 +472,7 @@ Check if the motion sensor detected the presence of someone in it's reach
 def rgb_to_hsv(r: int, g: int, b: int) -> tuple
 ```
 
-Convert RGB colors `(255, 220, 100)` to Philips Hue's hue, saturation and brightness values `(8456, 149, 245)` imprecisely
+Convert RGB colors `(255, 220, 100)` to Philips Hue's hue, saturation and brightness values `(8456, 154, 254)` imprecisely
 
 <a id="yahuelib.utils.kelvin_to_mired"></a>
 

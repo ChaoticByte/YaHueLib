@@ -5,7 +5,7 @@ from colorsys import rgb_to_hsv as _rgb_to_hsv
 
 
 def rgb_to_hsv(r:int, g:int, b:int) -> tuple:
-    '''Convert RGB colors `(255, 220, 100)` to Philips Hue's hue, saturation and brightness values `(8456, 149, 245)` imprecisely'''
+    '''Convert RGB colors `(255, 220, 100)` to Philips Hue's hue, saturation and brightness values `(8456, 154, 254)` imprecisely'''
     assert type(r) == int
     assert type(g) == int
     assert type(b) == int
@@ -13,7 +13,7 @@ def rgb_to_hsv(r:int, g:int, b:int) -> tuple:
     g_ = g / 255.0
     b_ = b / 255.0
     h_, s_, v_ = _rgb_to_hsv(r_, g_, b_)
-    hsv = (round(h_ * 65535.0), round(s_ * 245.0), round(v_ * 245.0))
+    hsv = (round(h_ * 65535.0), round(s_ * 254.0), round(v_ * 254.0))
     return hsv
 
 def kelvin_to_mired(kelvin:int):
